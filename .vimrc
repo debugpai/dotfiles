@@ -106,6 +106,7 @@ call plug#end()
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   set background=dark
   colorscheme base16-oceanicnext
+  "colorscheme base16-eighties
 
 "settings
   let mapleader="\<Space>"
@@ -122,11 +123,10 @@ call plug#end()
   set lazyredraw
   set ttyfast
   set scrolloff=5
-  set mouse=
   filetype plugin indent on
   nnoremap <Enter> G
   inoremap <Esc> <nop>
-  inoremap lk <Esc>
+  inoremap kj <Esc>
   nnoremap <Leader>w :w<Enter>
 
 "stay vmode on indent
@@ -152,10 +152,6 @@ call plug#end()
   set incsearch
 
 "remap navigation and disable arrow keys
-  noremap ; l
-  noremap l k
-  noremap k j
-  noremap j h
   noremap <up> <nop>
   noremap <down> <nop>
   noremap <left> <nop>
@@ -163,9 +159,9 @@ call plug#end()
 
 "buffer
   set hidden
-  nnoremap <Leader>; :bnext<Enter>
-  nnoremap <Leader>j :bprevious<Enter>
-  nnoremap <Leader>q :bd<Enter>
+  nnoremap <Leader>l :bnext<Enter>
+  nnoremap <Leader>h :bprevious<Enter>
+  nnoremap <Leader>q :bd <Bar> bprevious<Enter>
+  au FocusLost,BufLeave * :silent! wa
   au FocusGained,BufEnter * :silent! !
   "au FocusLost,BufLeave * :silent! w
-
