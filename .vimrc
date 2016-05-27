@@ -54,34 +54,50 @@ call plug#end()
 "neomake
   let g:neomake_open_list = 2
   let g:neomake_list_height = 3
-  autocmd! BufWritePost * Neomake
   let g:neomake_error_sign = {
     \ 'text': '✖>',
     \ 'texthl': 'SignifySignDelete',
   \ }
-  let g:neomake_javascript_semistandard_maker = {
+
+  if findfile('.eslintrc', '.;') !=# ''
+    let g:neomake_javascript_eslint_exe =  $PWD . '/node_modules/.bin/eslint'
+    let g:neomake_javascript_enabled_makers = ['eslint']
+		let g:neomake_jsx_enabled_makers = ['eslint']
+	else
+		let g:neomake_javascript_semistandard_maker = {
+		  \ 'errorformat': '%f:%l:%c: %m',
+		\ }
+		let g:neomake_javascript_enabled_makers = ['semistandard']
+		let g:neomake_jsx_semistandard_maker = {
+		  \ 'errorformat': '%f:%l:%c: %m',
+		\ }
+		let g:neomake_jsx_enabled_makers = ['semistandard']
+  endif
+
+  if findfile('.stylelintrc', '.;') !=# ''
+		let g:neomake_css_stylelint_maker = {
     \ 'errorformat': '%f:%l:%c: %m',
-  \ }
-  let g:neomake_javascript_enabled_makers = ['semistandard']
-  let g:neomake_jsx_semistandard_maker = {
-    \ 'errorformat': '%f:%l:%c: %m',
-  \ }
-  let g:neomake_jsx_enabled_makers = ['semistandard']
+		\ 'exe': $PWD . '/node_modules/.bin/stylelint'
+    \ }
+    let g:neomake_css_enabled_makers = ['stylelint']
+  endif
+
+  autocmd! BufWritePost * Neomake
 
 "YouCompleteMe
   let g:python_host_prog = '/usr/bin/python'
   let g:ycm_add_preview_to_completeopt = 0
   set completeopt-=preview
-  let g:ycm_semantic_triggers = {
-    \ 'css,scss' : ['re!\w*']
-  \ }
+  " let g:ycm_semantic_triggers = {
+  "   \ 'css,scss' : ['re!\w*']
+  " \ }
 
 "better-whitespace
   autocmd! BufWritePre * StripWhitespace
 
 "vim-smooth-scroll
-  noremap <silent> <C-l> :call smooth_scroll#up(10, 15, 1)<CR>
-  noremap <silent> <C-k> :call smooth_scroll#down(10, 15, 1)<CR>
+  noremap <silent> <C-k> :call smooth_scroll#up(20, 5, 1)<CR>
+  noremap <silent> <C-j> :call smooth_scroll#down(20, 5, 1)<CR>
 
 "multiple-cursor
   let g:multi_cursor_use_default_mapping=0
@@ -123,9 +139,9 @@ call plug#end()
   set lazyredraw
   set ttyfast
   set scrolloff=5
+	set showmatch
   filetype plugin indent on
   nnoremap <Enter> G
-  inoremap <Esc> <nop>
   inoremap kj <Esc>
   nnoremap <Leader>w :w<Enter>
 
@@ -141,7 +157,7 @@ call plug#end()
   set tabstop=2
   set softtabstop=2
   set shiftwidth=2
-  set expandtab
+  " set expandtab
   set shiftround
   set smartindent
 

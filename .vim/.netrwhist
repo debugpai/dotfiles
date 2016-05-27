@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/deepak.pai/git/fdp-visualization'
+let g:netrw_dirhist_2='/Users/deepak.pai/git/fdp-visualization/build'
+let g:netrw_dirhist_3='/Users/deepak.pai/Projects/fk-cp-zion/components/OffersZonePage'
