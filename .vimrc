@@ -1,11 +1,12 @@
 "============================== PLUGINS =============================="
 call plug#begin('~/.vim/plugged')
 
+	Plug 'joshdick/onedark.vim'
   Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'tpope/vim-fugitive'
   Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+	Plug 'joshdick/airline-onedark.vim'
   Plug 'easymotion/vim-easymotion'
   Plug 'tpope/vim-surround'
   Plug 'benekastah/neomake'
@@ -76,7 +77,10 @@ call plug#end()
 
   if findfile('.stylelintrc', '.;') !=# ''
 		let g:neomake_css_stylelint_maker = {
-    \ 'errorformat': '%f:%l:%c: %m',
+		\ 'errorformat':
+            \ '%+P%f,' .
+                \ '%*\s%l:%c  %t  %m,' .
+            \ '%-Q',
 		\ 'exe': $PWD . '/node_modules/.bin/stylelint'
     \ }
     let g:neomake_css_enabled_makers = ['stylelint']
@@ -96,8 +100,8 @@ call plug#end()
   autocmd! BufWritePre * StripWhitespace
 
 "vim-smooth-scroll
-  noremap <silent> <C-k> :call smooth_scroll#up(20, 5, 1)<CR>
-  noremap <silent> <C-j> :call smooth_scroll#down(20, 5, 1)<CR>
+	noremap <silent> <C-k> :call smooth_scroll#up(20, 0, 20)<CR>
+	noremap <silent> <C-j> :call smooth_scroll#down(20, 0, 20)<CR>
 
 "multiple-cursor
   let g:multi_cursor_use_default_mapping=0
@@ -113,6 +117,21 @@ call plug#end()
 "vim-jsx
   let g:jsx_ext_required = 0
 
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+	" bind \ (backward slash) to grep shortcut
+	command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+	nnoremap \ :Ag<SPACE>
+endif
+
 "============================== GENERAL =============================="
 
 "automatic reloading of .vimrc
@@ -121,8 +140,8 @@ call plug#end()
 "colorscheme
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   set background=dark
-  colorscheme base16-oceanicnext
-  "colorscheme base16-eighties
+	let g:onedark_termcolors=16
+  colorscheme onedark
 
 "settings
   let mapleader="\<Space>"
@@ -134,14 +153,13 @@ call plug#end()
   set undolevels=1000
   set number
   set relativenumber
-  set cursorline
-  set showcmd
-  set lazyredraw
+	set nocursorline
+	set noshowcmd
+  set nolazyredraw
   set ttyfast
   set scrolloff=5
 	set showmatch
   filetype plugin indent on
-  nnoremap <Enter> G
   inoremap kj <Esc>
   nnoremap <Leader>w :w<Enter>
 
@@ -160,6 +178,11 @@ call plug#end()
   " set expandtab
   set shiftround
   set smartindent
+
+"enter key remaps
+	nnoremap <Enter> G
+	xnoremap <Enter> G
+	autocmd! BufReadPost quickfix nnoremap <buffer> <Enter> <Enter>
 
 "search settings
   set hlsearch
