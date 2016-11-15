@@ -10,7 +10,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'easymotion/vim-easymotion'
   Plug 'tpope/vim-surround'
   Plug 'benekastah/neomake'
-  Plug 'Valloric/YouCompleteMe'
   Plug 'mattn/emmet-vim'
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'terryma/vim-smooth-scroll'
@@ -23,6 +22,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'gavocanov/vim-js-indent'
   Plug 'mxw/vim-jsx'
   Plug 'posva/vim-vue'
+	Plug 'Shougo/neocomplete'
 
 call plug#end()
 
@@ -60,7 +60,7 @@ call plug#end()
     \ 'texthl': 'SignifySignDelete',
   \ }
 
-  if findfile('.eslintrc', '.;') !=# ''
+  if findfile('.eslintrc.yml', '.;') !=# ''
     let g:neomake_javascript_eslint_exe =  $PWD . '/node_modules/.bin/eslint'
     let g:neomake_javascript_enabled_makers = ['eslint']
 		let g:neomake_jsx_enabled_makers = ['eslint']
@@ -88,13 +88,9 @@ call plug#end()
 
   autocmd! BufWritePost * Neomake
 
-"YouCompleteMe
-  let g:python_host_prog = '/usr/bin/python'
-  let g:ycm_add_preview_to_completeopt = 0
-  set completeopt-=preview
-  " let g:ycm_semantic_triggers = {
-  "   \ 'css,scss' : ['re!\w*']
-  " \ }
+"neocomplete
+	let g:neocomplete#enable_at_starup = 1
+	let g:neocomplete#enable_smart_case = 1
 
 "better-whitespace
   autocmd! BufWritePre * StripWhitespace
@@ -162,6 +158,10 @@ endif
   filetype plugin indent on
   inoremap kj <Esc>
   nnoremap <Leader>w :w<Enter>
+
+"omni completion
+	filetype plugin on
+	set omnifunc=syntaxcomplete#Complete
 
 "stay vmode on indent
   vnoremap < <gv
