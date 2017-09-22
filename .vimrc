@@ -6,7 +6,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'tpope/vim-fugitive'
   Plug 'vim-airline/vim-airline'
-	Plug 'joshdick/airline-onedark.vim'
   Plug 'easymotion/vim-easymotion'
   Plug 'tpope/vim-surround'
   Plug 'benekastah/neomake'
@@ -22,7 +21,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'gavocanov/vim-js-indent'
   Plug 'mxw/vim-jsx'
   Plug 'posva/vim-vue'
-	Plug 'Shougo/neocomplete'
 
 call plug#end()
 
@@ -40,7 +38,6 @@ call plug#end()
   \ }
 
 "airline
-  let g:airline_powerline_fonts = 1
   let g:airline#extensions#tabline#enabled = 1
   set laststatus=2
   let g:airline_section_y = ''
@@ -64,18 +61,9 @@ call plug#end()
     let g:neomake_javascript_eslint_exe =  $PWD . '/node_modules/.bin/eslint'
     let g:neomake_javascript_enabled_makers = ['eslint']
 		let g:neomake_jsx_enabled_makers = ['eslint']
-	else
-		let g:neomake_javascript_semistandard_maker = {
-		  \ 'errorformat': '%f:%l:%c: %m',
-		\ }
-		let g:neomake_javascript_enabled_makers = ['semistandard']
-		let g:neomake_jsx_semistandard_maker = {
-		  \ 'errorformat': '%f:%l:%c: %m',
-		\ }
-		let g:neomake_jsx_enabled_makers = ['semistandard']
   endif
 
-  if findfile('.stylelintrc', '.;') !=# ''
+  if findfile('.stylelintrc.yml', '.;') !=# ''
 		let g:neomake_css_stylelint_maker = {
 		\ 'errorformat':
             \ '%+P%f,' .
@@ -88,9 +76,6 @@ call plug#end()
 
   autocmd! BufWritePost * Neomake
 
-"neocomplete
-	let g:neocomplete#enable_at_starup = 1
-	let g:neocomplete#enable_smart_case = 1
 
 "better-whitespace
   autocmd! BufWritePre * StripWhitespace
@@ -147,21 +132,16 @@ endif
   set timeoutlen=500 ttimeoutlen=0
   set history=1000
   set undolevels=1000
-  set number
+  " set number
   set relativenumber
 	set nocursorline
+  set nocursorcolumn
 	set noshowcmd
   set nolazyredraw
   set ttyfast
   set scrolloff=5
 	set showmatch
   filetype plugin indent on
-  inoremap kj <Esc>
-  nnoremap <Leader>w :w<Enter>
-
-"omni completion
-	filetype plugin on
-	set omnifunc=syntaxcomplete#Complete
 
 "stay vmode on indent
   vnoremap < <gv
@@ -173,9 +153,9 @@ endif
 
 "code indenting
   set tabstop=2
-  set softtabstop=2
+  set softtabstop=0
   set shiftwidth=2
-  " set expandtab
+  set expandtab
   set shiftround
   set smartindent
 
@@ -204,3 +184,22 @@ endif
   au FocusLost,BufLeave * :silent! wa
   au FocusGained,BufEnter * :silent! !
   "au FocusLost,BufLeave * :silent! w
+
+"mouse
+	set mouse=a
+
+"vmode clipboard copy
+	vnoremap y :y*<Enter>
+
+
+"Use TAB to complete when typing words, else inserts TABs as usual.
+"Uses dictionary and source files to find matching words to complete.
+  function! Tab_Or_Complete()
+    if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+      return "\<C-N>"
+    else
+      return "\<Tab>"
+    endif
+  endfunction
+  inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+
