@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/lakshya/.oh-my-zsh
+export ZSH=/Users/dthonse/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -52,16 +52,9 @@ ZSH_THEME="agnoster"
 plugins=(git nvm zsh-syntax-highlighting z)
 
 # User configuration
-DEFAULT_USER="lakshya"
+DEFAULT_USER="dthonse"
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-
-export PATH=/Applications/MAMP/bin/php/php5.5.14/bin:$PATH
-
-export ANDROID_HOME=/Users/lakshya/Library/Android/sdk
-export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
-
-# export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,8 +79,6 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
-# alias vi="/Applications/MacVim.app/Contents/MacOS/Vim"
-alias vi="nvim"
-alias vim="nvim"
+alias vi="/usr/local/bin/mvim -v"
 alias zshrc="cd ~/dotfiles && vi .zshrc"
 alias vimrc="cd ~/dotfiles && vi .vimrc"
