@@ -9,18 +9,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'easymotion/vim-easymotion'
   Plug 'tpope/vim-surround'
   Plug 'benekastah/neomake'
-  Plug 'mattn/emmet-vim'
-  Plug 'ntpeters/vim-better-whitespace'
+  " Plug 'ntpeters/vim-better-whitespace'
   Plug 'terryma/vim-smooth-scroll'
-  Plug 'terryma/vim-multiple-cursors'
   Plug 'Raimondi/delimitMate'
   Plug 'tpope/vim-commentary'
-  Plug 'othree/html5.vim'
-  Plug 'othree/yajs.vim'
   Plug 'othree/es.next.syntax.vim'
-  Plug 'gavocanov/vim-js-indent'
-  Plug 'mxw/vim-jsx'
-  Plug 'posva/vim-vue'
+  " Plug 'mxw/vim-jsx'
+  Plug 'othree/html5.vim' 
+  Plug 'ssh://git.booking.com/gitroot/devtools/vim-booking.git'
 
 call plug#end()
 
@@ -36,6 +32,7 @@ call plug#end()
     \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|build)$',
     \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
   \ }
+  let g:ctrlp_open_multiple_files = 'ir'
 
 "airline
   let g:airline#extensions#tabline#enabled = 1
@@ -43,6 +40,7 @@ call plug#end()
   let g:airline_section_y = ''
   let g:airline_left_sep = ''
   let g:airline_right_sep = ''
+  let g:airline_section_warning = ''
 
 "vim-easymotion
   let g:EasyMotion_do_mapping = 0
@@ -78,25 +76,18 @@ call plug#end()
 
 
 "better-whitespace
-  autocmd! BufWritePre * StripWhitespace
+  " autocmd! BufWritePre * StripWhitespace
 
 "vim-smooth-scroll
 	noremap <silent> <C-k> :call smooth_scroll#up(20, 0, 20)<CR>
 	noremap <silent> <C-j> :call smooth_scroll#down(20, 0, 20)<CR>
-
-"multiple-cursor
-  let g:multi_cursor_use_default_mapping=0
-  let g:multi_cursor_next_key='<C-d>'
-  let g:multi_cursor_prev_key='<C-x>'
-  "let g:multi_cursor_skip_key='<C-x>'
-  let g:multi_cursor_quit_key='<Esc>'
 
 "delimitMate
   let delimitMate_expand_cr = 1
   let delimitMate_expand_space = 1
 
 "vim-jsx
-  let g:jsx_ext_required = 0
+  " let g:jsx_ext_required = 0
 
 " The Silver Searcher
 if executable('ag')
@@ -159,22 +150,11 @@ endif
   set shiftround
   set smartindent
 
-"enter key remaps
-	nnoremap <Enter> G
-	xnoremap <Enter> G
-	autocmd! BufReadPost quickfix nnoremap <buffer> <Enter> <Enter>
-
 "search settings
   set hlsearch
   set ignorecase
   set smartcase
   set incsearch
-
-"remap navigation and disable arrow keys
-  noremap <up> <nop>
-  noremap <down> <nop>
-  noremap <left> <nop>
-  noremap <right> <nop>
 
 "buffer
   set hidden
@@ -183,14 +163,12 @@ endif
   nnoremap <Leader>q :bd <Bar> bprevious<Enter>
   au FocusLost,BufLeave * :silent! wa
   au FocusGained,BufEnter * :silent! !
-  "au FocusLost,BufLeave * :silent! w
 
 "mouse
 	set mouse=a
 
 "vmode clipboard copy
 	vnoremap y :y*<Enter>
-
 
 "Use TAB to complete when typing words, else inserts TABs as usual.
 "Uses dictionary and source files to find matching words to complete.
