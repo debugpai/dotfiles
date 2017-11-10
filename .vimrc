@@ -33,6 +33,7 @@ call plug#end()
     \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
   \ }
   let g:ctrlp_open_multiple_files = 'ir'
+  let g:ctrlp_working_path_mode = 'w'
 
 "airline
   let g:airline#extensions#tabline#enabled = 1
@@ -169,6 +170,9 @@ endif
 
 "vmode clipboard copy
 	vnoremap y :y*<Enter>
+
+"paste mode toggle
+  set pastetoggle=<F2>
 
 "Use TAB to complete when typing words, else inserts TABs as usual.
 "Uses dictionary and source files to find matching words to complete.
