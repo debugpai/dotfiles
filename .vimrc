@@ -10,7 +10,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
   Plug 'benekastah/neomake'
   " Plug 'ntpeters/vim-better-whitespace'
-  Plug 'terryma/vim-smooth-scroll'
   Plug 'Raimondi/delimitMate'
   Plug 'tpope/vim-commentary'
   Plug 'othree/es.next.syntax.vim'
@@ -78,10 +77,6 @@ call plug#end()
 
 "better-whitespace
   " autocmd! BufWritePre * StripWhitespace
-
-"vim-smooth-scroll
-	noremap <silent> <C-k> :call smooth_scroll#up(20, 0, 20)<CR>
-	noremap <silent> <C-j> :call smooth_scroll#down(20, 0, 20)<CR>
 
 "delimitMate
   let delimitMate_expand_cr = 1
