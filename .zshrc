@@ -82,3 +82,11 @@ source $ZSH/oh-my-zsh.sh
 alias vi="/usr/local/bin/mvim -v"
 alias zshrc="cd ~/dotfiles && vi .zshrc"
 alias vimrc="cd ~/dotfiles && vi .vimrc"
+
+# export http_proxy=http://webproxy.lhr4.corp.booking.com:3128/
+# export https_proxy=$http_proxy
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+

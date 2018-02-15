@@ -169,14 +169,14 @@ endif
 "paste mode toggle
   set pastetoggle=<F2>
 
-"Use TAB to complete when typing words, else inserts TABs as usual.
-"Uses dictionary and source files to find matching words to complete.
-  function! Tab_Or_Complete()
-    if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
-      return "\<C-N>"
-    else
-      return "\<Tab>"
-    endif
-  endfunction
-  inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
-
+" <TAB>: completion.
+imap <silent><expr> <TAB>
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ "<C-n>"
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || strpart(getline('.'), 0, col) =~ '^\s*$'
+endfunction
+ 
+" <S-TAB>: completion back.
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>":
