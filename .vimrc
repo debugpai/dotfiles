@@ -1,7 +1,7 @@
 "============================== PLUGINS =============================="
 call plug#begin('~/.vim/plugged')
 
-	Plug 'joshdick/onedark.vim'
+	Plug 'NerdPad/dracula-vim'
   Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'tpope/vim-fugitive'
@@ -106,10 +106,10 @@ endif
   autocmd! bufwritepost .vimrc so % | AirlineRefresh
 
 "colorscheme
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  set background=dark
-	let g:onedark_termcolors=16
-  colorscheme onedark
+  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  " set background=dark
+	" let g:dracula_termcolors=16
+  colorscheme dracula
 
 "settings
   let mapleader="\<Space>"
