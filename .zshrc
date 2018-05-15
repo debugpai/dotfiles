@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/dthonse/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -79,10 +79,6 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
-alias vi="/usr/local/bin/mvim -v"
-alias zshrc="cd ~/dotfiles && vi .zshrc"
-alias vimrc="cd ~/dotfiles && vi .vimrc"
-
 # export http_proxy=http://webproxy.lhr4.corp.booking.com:3128/
 # export https_proxy=$http_proxy
 
@@ -91,4 +87,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+source ~/.alias
 
