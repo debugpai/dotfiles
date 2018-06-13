@@ -8,13 +8,15 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'easymotion/vim-easymotion'
   Plug 'tpope/vim-surround'
-  Plug 'benekastah/neomake'
+  " Plug 'benekastah/neomake'
   " Plug 'ntpeters/vim-better-whitespace'
   Plug 'Raimondi/delimitMate'
   Plug 'tpope/vim-commentary'
   Plug 'othree/es.next.syntax.vim'
-  " Plug 'mxw/vim-jsx'
+  Plug 'mxw/vim-jsx'
   Plug 'othree/html5.vim' 
+  Plug 'pangloss/vim-javascript'
+  Plug 'w0rp/ale'
   Plug 'ssh://git.booking.com/gitroot/devtools/vim-booking.git'
 
 call plug#end()
@@ -47,32 +49,43 @@ call plug#end()
   let g:EasyMotion_smartcase = 1
   nmap s <Plug>(easymotion-s2)
 
+" ale
+  let g:ale_lint_on_text_changed = 'never'
+  let g:ale_linters = {
+  \   'javascript': ['eslint'],
+  \}
+  " let g:ale_fixers = {
+  " \ 'javascript': ['eslint','prettier']
+  " \ }
+
+
+
 "neomake
-  let g:neomake_open_list = 2
-  let g:neomake_list_height = 3
-  let g:neomake_error_sign = {
-    \ 'text': '✖>',
-    \ 'texthl': 'SignifySignDelete',
-  \ }
+  " let g:neomake_open_list = 2
+  " let g:neomake_list_height = 3
+  " let g:neomake_error_sign = {
+  "   \ 'text': '✖>',
+  "   \ 'texthl': 'SignifySignDelete',
+  " \ }
 
-  if findfile('.eslintrc.yml', '.;') !=# ''
-    let g:neomake_javascript_eslint_exe =  $PWD . '/node_modules/.bin/eslint'
-    let g:neomake_javascript_enabled_makers = ['eslint']
-		let g:neomake_jsx_enabled_makers = ['eslint']
-  endif
+  " if findfile('.eslintrc', '.;') !=# ''
+  "   let g:neomake_javascript_eslint_exe =  $PWD . '/node_modules/.bin/eslint'
+  "   let g:neomake_javascript_enabled_makers = ['eslint']
+		" let g:neomake_jsx_enabled_makers = ['eslint']
+  " endif
 
-  if findfile('.stylelintrc.yml', '.;') !=# ''
-		let g:neomake_css_stylelint_maker = {
-		\ 'errorformat':
-            \ '%+P%f,' .
-                \ '%*\s%l:%c  %t  %m,' .
-            \ '%-Q',
-		\ 'exe': $PWD . '/node_modules/.bin/stylelint'
-    \ }
-    let g:neomake_css_enabled_makers = ['stylelint']
-  endif
+  " if findfile('.stylelintrc.yml', '.;') !=# ''
+		" let g:neomake_css_stylelint_maker = {
+		" \ 'errorformat':
+  "           \ '%+P%f,' .
+  "               \ '%*\s%l:%c  %t  %m,' .
+  "           \ '%-Q',
+		" \ 'exe': $PWD . '/node_modules/.bin/stylelint'
+  "   \ }
+  "   let g:neomake_css_enabled_makers = ['stylelint']
+  " endif
 
-  autocmd! BufWritePost * Neomake
+  " autocmd! BufWritePost * Neomake
 
 
 "better-whitespace
@@ -129,6 +142,8 @@ endif
   set scrolloff=5
 	set showmatch
   filetype plugin indent on
+  " Hack because vim isnt detecting javascript files for some reason
+  au! BufRead,BufNewFile *.js set filetype=javascript
 
 "stay vmode on indent
   vnoremap < <gv
